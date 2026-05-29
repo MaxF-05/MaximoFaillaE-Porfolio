@@ -598,7 +598,8 @@
             rocket: {
                 title: "RFP Liquid Rocket Propulsion (ERPL)",
                 org: "Embry-Riddle Rocket Propulsion Laboratory",
-                badge: '<i class="fa-solid fa-crosshairs"></i> Liquid Propulsion', deepDescription: `
+                badge: '<i class="fa-solid fa-crosshairs"></i> Liquid Propulsion',
+                deepDescription: `
                     <p>This program detailed design blueprints producing an optimized two-stage liquid bipropellant rocket engine targeting a constant thrust profile of 1500 lbf.</p>
                     <h5>Comprehensive Systems Breakdown:</h5>
                     <ul>
@@ -649,7 +650,7 @@
                     <video src="media/ProximitySensorVideo2.mp4" controls playsinline style="width:100%; border:1px solid rgba(255, 255, 255, 0.08); background:#000; margin-bottom: 1.5rem;">
                         Your terminal platform doesn't display raw inline video feeds. Check asset routing.
                     </video>`,
-                images: ["media/ProximitsySensorVideo1.MOV"]
+                images: ["media/ProximitsySensorVideo1.mp4"]
             },
             portfolio: {
                 title: "Aerospace HUD Portfolio Architecture",
@@ -696,7 +697,6 @@
             
             data.images.forEach(imgUrl => {
                 const lowerUrl = imgUrl.toLowerCase();
-                // If the asset has a video extension, generate a video tag instead of an image tag
                 if (lowerUrl.endsWith('.mp4') || lowerUrl.endsWith('.mov')) {
                     const videoNode = document.createElement('video');
                     videoNode.src = imgUrl;
@@ -707,10 +707,6 @@
                     
                     videoNode.onerror = function() {
                         this.style.display = 'none';
-                        const placeholderNode = document.createElement('div');
-                        placeholderNode.className = 'media-placeholder-hud';
-                        placeholderNode.innerText = `[ VIDEO RECORD: ${imgUrl.split('/').pop().toUpperCase()} NOT SECURED IN LOCAL DIRECTORY ]`;
-                        galleryWrapper.appendChild(placeholderNode);
                     };
                     galleryWrapper.appendChild(videoNode);
                 } else {
@@ -721,10 +717,6 @@
                     
                     imgNode.onerror = function() {
                         this.style.display = 'none';
-                        const placeholderNode = document.createElement('div');
-                        placeholderNode.className = 'media-placeholder-hud';
-                        placeholderNode.innerText = `[ SCHEMATIC RECORD: ${imgUrl.split('/').pop().toUpperCase()} NOT SECURED IN LOCAL DIRECTORY ]`;
-                        galleryWrapper.appendChild(placeholderNode);
                     };
                     galleryWrapper.appendChild(imgNode);
                 }
