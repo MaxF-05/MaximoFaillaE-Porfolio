@@ -9,6 +9,84 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Lightbox Fullscreen Overlay Styles */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            opacity: 0;
+            transition: opacity 0.25s ease-in-out;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox-content-container {
+            position: relative;
+            max-width: 90vw;
+            max-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-media {
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.15);
+            border-radius: 4px;
+        }
+
+        .lightbox-close-btn {
+            position: absolute;
+            top: -45px;
+            right: 0;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--accent-cyan, #00f0ff);
+            color: #fff;
+            padding: 6px 14px;
+            font-size: 0.85rem;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: all 0.2s ease;
+        }
+
+        .lightbox-close-btn:hover {
+            background: var(--accent-cyan, #00f0ff);
+            color: #000;
+        }
+
+        /* Cursor hints for media */
+        .modal-gallery img, 
+        .modal-gallery video, 
+        .modal-video-container video {
+            cursor: zoom-in;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .modal-gallery img:hover, 
+        .modal-gallery video:hover, 
+        .modal-video-container video:hover {
+            transform: scale(1.02);
+            border-color: var(--accent-cyan, #00f0ff) !important;
+        }
+    </style>
 </head>
 <body>
 
@@ -87,7 +165,7 @@
                             <li><span class="t-label">PROPULSION TRACK:</span> <span class="t-value">PROPULSION SYSTEMS / TURBINES</span></li>
                             <li><span class="t-label">PRIMARY APPLICATION:</span> <span class="t-value">TACTICAL AIR DEFENSE & LAUNCH</span></li>
                             <li><span class="t-label">VELOCITY ENVELOPE:</span> <span class="t-value">SUPERSONIC / ANALYTICAL CALCULATIONS</span></li>
-                            <li><span class="t-label">CORE TOOLS:</span> <span class="t-value">CATIA v5 / MATLAB / FUSION 360</span></li>
+                            <li><span class="t-label">CORE TOOLS:</span> <span class="t-value">CATIA / MATLAB / FUSION 360</span></li>
                         </ul>
                         <div class="telemetry-footer">
                             <i class="fa-solid fa-satellite-dish"></i> TRACKING STABLE
@@ -122,7 +200,7 @@
 
                     <div class="edu-stats-grid">
                         <div class="edu-stat-node"><span class="node-val">3.5 / 4.0</span><span class="node-lbl">CUMULATIVE GPA</span></div>
-                        <div class="edu-stat-node"><span class="node-val">3X RECIPIENT</span><span class="node-lbl">ERAU DEAN'S LIST (SPR '24/'25, WIN '25)</span></div>
+                        <div class="edu-stat-node"><span class="node-val">3X RECIPIENT</span><span class="node-lbl">ERAU DEAN'S LIST (SPR '24/'25, FALL '25)</span></div>
                     </div>
                     
                     <div class="academic-highlights">
@@ -141,8 +219,8 @@
                                 <h5>Industry Certifications</h5>
                                 <ul>
                                     <li><i class="fa-solid fa-certificate"></i> Autodesk Fusion 360 Certified User</li>
-                                    <li><i class="fa-solid fa-screwdriver-wrench"></i> Dial Caliper / Snap-On Tooling Mastery</li>
-                                    <li><i class="fa-solid fa-cube"></i> CATIA v5 High-Fidelity Solid Modeling</li>
+                                    <li><i class="fa-solid fa-screwdriver-wrench"></i> Snap-On / Dial Caliper Certified</li>
+                                    <li><i class="fa-solid fa-cube"></i> CATIA High-Fidelity Solid Modeling</li>
                                 </ul>
                             </div>
                         </div>
@@ -162,18 +240,19 @@
                     <div class="project-badge class-propulsion"><i class="fa-solid fa-fire-flame-curved"></i> <i class="fa-solid fa-fan"></i> Propulsion Systems</div>
                     <div class="project-content">
                         <div class="project-header">
-                            <span class="project-date">FALL '24 - PRESENT</span>
+                            <span class="project-date">FALL '24 - FALL '25</span>
                             <h3>Initium Pulse-Jet Engine (XJEP)</h3>
                             <p class="project-org">Experimental Propulsion Lab Group • Daytona Beach, FL</p>
                         </div>
                         <div class="project-body">
-                            <p class="project-summary">Collaborating in configuring and routing a custom, high-safety automated testing cell designed for rigorous hot-fire operations of the proprietary "Initium" air-breathing pulse-jet architecture.</p>
+                            <p class="project-summary">Collaborated in developing a test cell for a functioning and safe hot-fire for the new "Initium" pulsejet.</p>
                             <ul>
-                                <li>Developed highly complex 3D CAD master assemblies utilizing CATIA v5 capturing engine hull paths, air inlet parameters, and test cell adapters.</li>
-                                <li>Researched high-thermal resistance electrical harness schedules to ensure telemetry links remain stable under heat stresses.</li>
+                                <li>Designed a 3D CAD model (CATIA) of the pulsejet and its connecting components (fuel pump, control board, etc.).</li>
+                                <li>Selected wiring components based on voltage, current, load requirements for pulsejet-to-test-cell integration.</li>
+                                <li>Enhanced air flow using different fan nose prototypes attached to the pulsejet for optimal hot fire.</li>
                             </ul>
                             <div class="project-tags">
-                                <span class="tag">CATIA v5 Layout</span>
+                                <span class="tag">CATIA Layout</span>
                                 <span class="tag">Pulse-Jet Diagnostics</span>
                                 <span class="tag">Test-Cell Infrastructure</span>
                             </div>
@@ -216,13 +295,14 @@
                         <div class="project-header">
                             <span class="project-date">FALL '25 - PRESENT</span>
                             <h3>Project Chimera: Adaptive Wing Morphing</h3>
-                            <p class="project-org">Laboratory of Deployable Architecture</p>
+                            <p class="project-org">Laboratory of Deployable Architecture • Daytona Beach, FL</p>
                         </div>
                         <div class="project-body">
-                            <p class="project-summary">Formulated an intricate, shifting internal truss matrix optimized for mid-flight airfoil adjustment profiles on autonomous flight assets.</p>
+                            <p class="project-summary">Formulated a tessellated tetrahedron truss structure using 2 linear actuators across 4 control nodes per module for mid-flight wing morphing.</p>
                             <ul>
-                                <li>Engineered internal routing control systems leveraging PWM signals for high-frequency linear actuator stroke management.</li>
-                                <li>Integrated specialized Arduino microcontrollers alongside Linear Actuator Control (LAC) boards to manage precise airfoil camber scaling.</li>
+                                <li>Focused primarily on electrical components (Arduino, LAC Board) and wiring needed with a PWM approach.</li>
+                                <li>Integrated machine learning approaches to map control inputs to optimized wing morphing configurations enabling adaptive structural response across flight regimes.</li>
+                                <li>Conducted literature review on morphing wing systems and control methodologies to validate design decisions.</li>
                             </ul>
                             <div class="project-tags">
                                 <span class="tag">Arduino Array</span>
@@ -241,14 +321,14 @@
                     <div class="project-content">
                         <div class="project-header">
                             <span class="project-date">FALL '24 - SPRING '25</span>
-                            <h3>RFP Liquid Rocket Propulsion (ERPL)</h3>
-                            <p class="project-org">Embry-Riddle Rocket Propulsion Laboratory</p>
+                            <h3>RFP Rocket Propulsion Project (ERPL)</h3>
+                            <p class="project-org">Embry-Riddle Rocket Propulsion Laboratory • Daytona Beach, FL</p>
                         </div>
                         <div class="project-body">
-                            <p class="project-summary">Co-developed a comprehensive mathematical simulation layout and volumetric sizing profile for a high-performance two-stage liquid thruster target.</p>
+                            <p class="project-summary">Developed a design for a two-stage liquid rocket that is capable of attaining a nominal thrust of 1500 lbf.</p>
                             <ul>
-                                <li>Programmed predictive data generation architectures in MATLAB to calculate engine performance values, processing chamber stagnation pressures and exit velocity.</li>
-                                <li>Drafted dimensional physical sub-assemblies inside Autodesk Inventor, refining injector patterns and ablative throat layers.</li>
+                                <li>Utilized MATLAB to optimize two-stage liquid rocket performance under given mass/cost constraints.</li>
+                                <li>Created design of each part (ablative cooling, injector, chamber, etc.) of the whole thruster assembly using Inventor.</li>
                             </ul>
                             <div class="project-tags">
                                 <span class="tag">MATLAB Analytics</span>
@@ -274,10 +354,10 @@
                             <p class="project-summary">Executed a strict physical structural teardown and high-fidelity dimensional reproduction of a complex mechanical analog timepiece.</p>
                             <ul>
                                 <li>Utilized advanced pre-CAD planning workflows to break down interlocking gear cascades into core parametric sketches.</li>
-                                <li>Constructed a microscopic 3D assembly inside CATIA v5, cataloging a complete structural packet with exploded views and tolerance definitions.</li>
+                                <li>Constructed a 3D assembly inside CATIA, cataloging a complete structural packet with exploded views and tolerance definitions across 18 unique parts.</li>
                             </ul>
                             <div class="project-tags">
-                                <span class="tag">CATIA v5 Spec</span>
+                                <span class="tag">CATIA Spec</span>
                                 <span class="tag">Kinematic Assemblies</span>
                                 <span class="tag">Pre-CAD Mapping</span>
                             </div>
@@ -350,52 +430,48 @@
             
             <div class="skills-wrapper">
                 <div class="skills-group">
-                    <h3><i class="fa-solid fa-computer"></i> CAD, Simulation, & Code Environments</h3>
+                    <h3><i class="fa-solid fa-laptop-code"></i> Engineering Software</h3>
                     <div class="skills-list">
                         <div class="skill-item">
-                            <span>CATIA v5 (Advanced Surface & Gear Train Assemblies)</span>
+                            <span>CATIA</span>
                             <div class="bar-fill" style="width: 85%;"></div>
                         </div>
                         <div class="skill-item">
-                            <span>MATLAB (Thermodynamic & Orbital Simulation Scripts)</span>
-                            <div class="bar-fill" style="width: 80%;"></div>
+                            <span>MATLAB</span>
+                            <div class="bar-fill" style="width: 85%;"></div>
                         </div>
                         <div class="skill-item">
-                            <span>Autodesk Fusion 360 (Certified Application User)</span>
+                            <span>AUTODESK FUSION 360</span>
                             <div class="bar-fill" style="width: 90%;"></div>
                         </div>
                         <div class="skill-item">
-                            <span>Autodesk Inventor (Fluid Domain Assemblies)</span>
+                            <span>VisualStudio</span>
                             <div class="bar-fill" style="width: 75%;"></div>
                         </div>
                         <div class="skill-item">
-                            <span>VisualStudio Platform Engineering</span>
-                            <div class="bar-fill" style="width: 70%;"></div>
-                        </div>
-                        <div class="skill-item">
-                            <span>Python Environment Integration</span>
-                            <div class="bar-fill" style="width: 50%;"></div>
-                            <small class="learning-tag">// TELEMETRY PIPELINES UNDER DEVELOPMENT</small>
+                            <span>Python</span>
+                            <div class="bar-fill" style="width: 65%;"></div>
                         </div>
                     </div>
                 </div>
 
                 <div class="skills-group">
-                    <h3><i class="fa-solid fa-screwdriver-wrench"></i> Tooling & Structural Fabrication</h3>
+                    <h3><i class="fa-solid fa-screwdriver-wrench"></i> Technical Capabilities</h3>
                     <div class="skill-tags-container">
-                        <span class="skill-pill"><i class="fa-solid fa-drafting-compass"></i> Engineering Blueprinting / GD&T</span>
-                        <span class="skill-pill"><i class="fa-solid fa-microchip"></i> 3D Printing & Additive Manufacturing</span>
-                        <span class="skill-pill"><i class="fa-solid fa-bolt"></i> Test-Cell Thermal Sensor Wire Paths</span>
-                        <span class="skill-pill"><i class="fa-solid fa-gears"></i> CNC Milling Setup & Execution</span>
-                        <span class="skill-pill"><i class="fa-solid fa-compass-drafting"></i> Technical Report Drafting</span>
-                        <span class="skill-pill"><i class="fa-solid fa-hammer"></i> High-Precision Commercial Power Tools</span>
-                        <span class="skill-pill"><i class="fa-solid fa-gauge"></i> Dial Caliper / Snap-On Inspection Tooling</span>
+                        <span class="skill-pill"><i class="fa-solid fa-compass-drafting"></i> Technical Drafting</span>
+                        <span class="skill-pill"><i class="fa-solid fa-cube"></i> 3-D Printing</span>
+                        <span class="skill-pill"><i class="fa-solid fa-code"></i> Coding</span>
+                        <span class="skill-pill"><i class="fa-solid fa-file-contract"></i> Technical Reports</span>
+                        <span class="skill-pill"><i class="fa-solid fa-gears"></i> CNC Milling</span>
+                        <span class="skill-pill"><i class="fa-solid fa-layer-group"></i> CAD</span>
+                        <span class="skill-pill"><i class="fa-solid fa-microchip"></i> CAM</span>
+                        <span class="skill-pill"><i class="fa-solid fa-chart-line"></i> Stress/Strain Analysis</span>
                     </div>
                     
-                    <h3 style="margin-top: 2rem;"><i class="fa-solid fa-globe"></i> Native Communication Lines</h3>
+                    <h3 style="margin-top: 2rem;"><i class="fa-solid fa-language"></i> Native Languages</h3>
                     <div class="language-block">
-                        <p><strong>ENGLISH</strong> — Native / Technical Threshold Approved</p>
-                        <p><strong>SPANISH</strong> — Native / Bilingual Operational Clear</p>
+                        <p><strong>SPANISH</strong> — Native Operational Threshold</p>
+                        <p><strong>ENGLISH</strong> — Native Operational Threshold</p>
                     </div>
                 </div>
             </div>
@@ -404,7 +480,7 @@
 
     <section id="experience" class="experience-section">
         <div class="container">
-            <h2 class="section-title"><span class="title-index">05 //</span> Leadership Footprint</h2>
+            <h2 class="section-title"><span class="title-index">05 //</span> Leadership & Experience Footprint</h2>
             
             <div class="timeline">
                 <div class="timeline-item">
@@ -415,11 +491,42 @@
                     </div>
                     <div class="timeline-content">
                         <h3>Fundraising Chair (Executive Leadership Board)</h3>
-                        <p class="role-desc">Elected to manage chapter asset accumulation pipelines, providing logistical, corporate outreach, and budget tracking metrics to maximize student travel allocations to national engineering conventions.</p>
+                        <p class="role-desc">Elected to executive leadership role responsible for designing and executing fundraising strategies to support student participation in national engineering conferences.</p>
                         <ul>
-                            <li>Coordinate with internal finance chairs to track chapter liquid reserves and manage event financial inflows.</li>
-                            <li>Develop local marketing and partnership tracks, increasing chapter capital returns across active funding cycles.</li>
-                            <li>Delegate technical tasks across dynamic committees, validating milestone parameters to ensure event timeline completion.</li>
+                            <li>Collaborated with executive board and finance leadership to analyze fundraising performance, monitor financial status, and optimize budget allocation strategies.</li>
+                            <li>Planned, organized, and executed 10 fundraising events over a 4-month period, optimizing logistics, outreach, and engagement.</li>
+                            <li>Delegated responsibilities across fundraising committee members, providing direction and oversight to ensure efficient execution and successful event outcomes.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-meta">
+                        <span class="timeline-date">FALL '25 - PRESENT</span>
+                        <span class="timeline-company">Olive Garden</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Server</h3>
+                        <p class="role-desc">Providing exceptional hospitality through customer care and fast, attentive service in high-volume environments.</p>
+                        <ul>
+                            <li>Maintain continuous awareness across the dining hall following core operational fundamentals to ensure high satisfaction.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-meta">
+                        <span class="timeline-date">SUMMER '25 / '26</span>
+                        <span class="timeline-company">ELEVO Learning</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Summer Instructor (Full Time)</h3>
+                        <p class="role-desc">Facilitated K-6th grade physical education classes integrated with social-emotional learning curriculum.</p>
+                        <ul>
+                            <li>Demonstrated strong leadership and flexibility managing schedule changes and varying age groups daily.</li>
+                            <li>Collaborated as an effective team unit to execute daily learning targets and activity agendas.</li>
                         </ul>
                     </div>
                 </div>
@@ -501,6 +608,7 @@
         </div>
     </footer>
 
+    <!-- Main Project Diagnostics Modal -->
     <div id="projectModal" class="project-modal">
         <div class="modal-overlay" onclick="closeProjectModal()"></div>
         <div class="modal-wrapper">
@@ -533,6 +641,14 @@
         </div>
     </div>
 
+    <!-- Fullscreen Lightbox Modal -->
+    <div id="lightboxModal" class="lightbox-modal" onclick="closeLightbox(event)">
+        <div class="lightbox-content-container">
+            <button class="lightbox-close-btn" onclick="closeLightbox(event)"><i class="fa-solid fa-xmark"></i> CLOSE FULLSCREEN [ESC]</button>
+            <div id="lightboxMediaWrapper"></div>
+        </div>
+    </div>
+
     <script>
         const projectDatabase = {
             initium: {
@@ -540,15 +656,15 @@
                 org: "Experimental Propulsion Lab Group • Daytona Beach, FL",
                 badge: '<i class="fa-solid fa-fire-flame-curved"></i> <i class="fa-solid fa-fan"></i> Propulsion Systems',
                 deepDescription: `
-                    <p>The Initium Project handles the layout architecture and safe integration of a high-temperature, air-breathing pulse-jet laboratory testing apparatus.</p>
+                    <p>Collaborated in developing a test cell for a functioning and safe hot-fire for the new "Initium" pulsejet.</p>
                     <h5>Comprehensive Systems Breakdown:</h5>
                     <ul>
-                        <li><strong>Advanced Modeling:</strong> Managed extensive structural mockups utilizing <strong>CATIA v5</strong> to isolate engine hull boundaries, fueling paths, and structural mount collars.</li>
-                        <li><strong>Thermal Protection Wiring:</strong> Evaluated heat shielding solutions for telemetry paths to maintain electrical stability under extreme exhaust combustion gradients.</li>
-                        <li><strong>Integration Logistics:</strong> Sourced component footprints ensuring flawless connectivity between fuel pumps, diagnostic sensors, and the main cell frame.</li>
+                        <li><strong>3D CAD Modeling:</strong> Designed a 3D CAD model (CATIA) of the pulsejet and its connecting components (fuel pump, control board, etc.).</li>
+                        <li><strong>Harnessing & Load Sizing:</strong> Selected wiring components based on voltage, current, load requirements for pulsejet-to-test-cell integration.</li>
+                        <li><strong>Airflow Enhancement:</strong> Enhanced the air flow using different fan nose prototypes to attach onto pulsejet for optimal hot fire.</li>
                     </ul>
                     <h5>Analytical State:</h5>
-                    <p>CAD sheets complete. Currently validating safety margins before launching active telemetry tracking on live hot-fire schedules.</p>
+                    <p>Testing hardware parameters finalized. Assembly operational for hot-fire cycles.</p>
                 `,
                 videoHtml: `
                     <video src="media/initium_test_run.mp4" controls poster="media/initium_poster.jpg">
@@ -569,46 +685,52 @@
                         <li><strong>Economic Space Optimization:</strong> Drafted an extensive technical paper focusing on launching inside more cost-effective flight windows, undercutting legacy rideshare market price structures.</li>
                     </ul>
                     <h5>Analytical State:</h5>
-                    <p>Simulations fully processed and validated against baseline manufacturer trajectory profiles. Final documentation cataloged in the institutional archive.</p>
+                    <p>Simulations fully processed and validated against baseline manufacturer trajectory profiles.</p>
                 `,
                 videoHtml: `<div class="media-placeholder-hud">// SIMULATED LAUNCH VEHICLE TELEMETRY ARRAY LOCKED IN MATRIX //</div>`,
                 images: ["media/falcon9_matlab_graphs.jpg", "media/falcon9_report_cover.jpg"]
             },
             chimera: {
                 title: "Project Chimera: Adaptive Wing Morphing",
-                org: "Laboratory of Deployable Architecture",
+                org: "Laboratory of Deployable Architecture • Daytona Beach, FL",
                 badge: '<i class="fa-solid fa-wind"></i> Structural Aerodynamics',
                 deepDescription: `
-                    <p>Project Chimera shifts away from standard separate wing control surfaces by designing an interior flexible mechanical framework that twists and reshapes the wing section dynamically using linear actuators.</p>
+                    <p>Formulated a tessellated tetrahedron truss structure using 2 linear actuators across 4 control nodes per module for mid-flight wing morphing.</p>
                     <h5>Comprehensive Systems Breakdown:</h5>
                     <ul>
-                        <li><strong>Logic and Actuation Core:</strong> Designed structural control loops utilizing <strong>Arduino</strong> systems and explicit Linear Actuator Control (LAC) architectures.</li>
-                        <li><strong>PWM Signal Management:</strong> Programmed continuous Pulse Width Modulation (PWM) duty cycling arrays to control high-speed linear actuator extensions.</li>
-                        <li><strong>Telemetry and Machine Learning:</strong> Integrated early predictive script structures to convert incoming speed/angle parameters into physical structural movements.</li>
+                        <li><strong>Electrical Architecture:</strong> Focused primarily on electrical components (Arduino, LAC Board, etc.) and wiring needed with a PWM approach.</li>
+                        <li><strong>Machine Learning Integration:</strong> Integrated machine learning approaches to map control inputs to optimized wing morphing configurations, enabling adaptive structural response across multiple flight regimes.</li>
+                        <li><strong>Academic Literature Review:</strong> Conducted a comprehensive literature review of published research on morphing wing systems, adaptive aerostructures, and control methodologies to validate design decisions.</li>
                     </ul>
                     <h5>Analytical State:</h5>
-                    <p> Code validation complete and tested. Wind tunnel simulation testing is scheduled next.</p>
+                    <p>Physical model being constructed.</p>
                 `,
                 videoHtml: `
-                    <video src="media/chimera_wing_flex.mp4" controls>
-                        Your terminal platform doesn't display raw inline mp4 video feeds. Check asset routing.
+                    <video src="media/IMG_0126.mp4" controls playsinline style="width:100%; border:1px solid rgba(255, 255, 255, 0.08); background:#000; margin-bottom: 1.5rem;">
+                        Your terminal platform doesn't display raw inline video feeds. Check asset routing.
                     </video>`,
-                images: ["media/chimera_bench_setup.jpg", "media/chimera_mechanism_drawing.jpg"]
+                images: [
+                    "media/FullWingModel.png",
+                    "media/MATLAB model.png",
+                    "media/halfModule.png",
+                    "media/1Tetrahedron_Beyond.jpg",
+                    "media/PhysModel.jpg",
+                    "media/Assembly_Wiring Schematic.jpg"
+                ]
             },
             rocket: {
-                title: "RFP Liquid Rocket Propulsion (ERPL)",
-                org: "Embry-Riddle Rocket Propulsion Laboratory",
+                title: "RFP Rocket Propulsion Project (ERPL)",
+                org: "Embry-Riddle Rocket Propulsion Laboratory • Daytona Beach, FL",
                 badge: '<i class="fa-solid fa-crosshairs"></i> Liquid Propulsion',
                 deepDescription: `
-                    <p>This program detailed design blueprints producing an optimized two-stage liquid bipropellant rocket engine targeting a constant thrust profile of 1500 lbf.</p>
+                    <p>Developed a design for a two-stage liquid rocket that is capable of attaining a nominal thrust of 1500 lbf.</p>
                     <h5>Comprehensive Systems Breakdown:</h5>
                     <ul>
-                        <li><strong>Thermodynamic Computational Scripts:</strong> Built performance forecasting loops inside <strong>MATLAB</strong> calculating specific impulse iterations, chamber pressures, and fluid flow velocity properties.</li>
-                        <li><strong>Component Design and Tolerancing:</strong> Drafted physical parts layouts inside <strong>Autodesk Inventor</strong> tracking specialized injector plates, convergence-divergence throat sections, and insulation barriers.</li>
-                        <li><strong>Thermal Management:</strong> Evaluated properties for regeneratively cooled engine sections paired with sacrificial ablative layers.</li>
+                        <li><strong>MATLAB Optimization:</strong> Utilized MATLAB to optimize two-stage liquid rocket performance under given mass/cost constraints.</li>
+                        <li><strong>Component CAD Modeling:</strong> Created design of each part (ablative cooling, injector, chamber, etc.) of the whole thruster assembly using Inventor.</li>
                     </ul>
                     <h5>Analytical State:</h5>
-                    <p>Analytical matrix complete. Core modeling sheets have been archived for future hardware casting prototyping cycles.</p>
+                    <p>Design package completed and verified under project boundaries.</p>
                 `,
                 videoHtml: `<div class="media-placeholder-hud">// REGENERATIVE THERMAL GRADIENT SIMULATION RESTRICTED AT STATION //</div>`,
                 images: ["media/rocket_matlab_output.jpg", "media/rocket_inventor_cross_section.jpg"]
@@ -618,18 +740,24 @@
                 org: "Mechanical Modeling Diagnostics Group • Daytona Beach, FL",
                 badge: '<i class="fa-solid fa-gears"></i> Mechanical Systems',
                 deepDescription: `
-                    <p>This precision modeling project prioritized complete physical hardware deconstruction and mathematical reproduction of an intricate multivariable analog timepiece.</p>
+                    <p>This precision modeling project prioritized complete physical hardware deconstruction and mathematical reproduction of an intricate multivariable analog timepiece, decomposing the layout into 18 distinct physical components.</p>
                     <h5>Comprehensive Systems Breakdown:</h5>
                     <ul>
                         <li><strong>Pre-CAD Geometry Decomposition:</strong> Applied rigorous planning parameters to break down dense mechanical gear structures, escape mechanisms, and drive pins into basic geometry loops.</li>
-                        <li><strong>Kinematic Assembly Generation:</strong> Programmed internal constraints and joint tolerances inside <strong>CATIA v5</strong> to form a perfectly nested mechanical watch movement.</li>
+                        <li><strong>Kinematic Assembly Generation:</strong> Programmed internal constraints and joint tolerances inside <strong>CATIA</strong> to form a perfectly nested mechanical watch movement.</li>
                         <li><strong>Complete Drafting Production:</strong> Compiled a thorough design data packet mapping detailed parts list schedules, material specs, and exploded sub-assembly diagrams.</li>
                     </ul>
                     <h5>Analytical State:</h5>
                     <p>Full CAD engineering package finalized and locked at 100% component tolerance verification.</p>
                 `,
-                videoHtml: `<div class="media-placeholder-hud">// KINEMATIC GEAR MESH ROTATION REPLICATED ON TERMINAL STAGE //</div>`,
-                images: ["media/clock_exploded_view.jpg", "media/clock_catia_assembly.jpg"]
+                videoHtml: `
+                    <div class="media-placeholder-hud" style="margin-bottom: 1.5rem;">
+                        <i class="fa-solid fa-cubes"></i> HIGH-FIDELITY CAD VS. PHYSICAL COMPONENT TEARDOWN DATA MATRIX READY
+                    </div>`,
+                images: [
+                    "media/FAILLA_CP_CLOCK_RENDERING.png",
+                    "media/CAD vs Real.pdf"
+                ]
             },
             sensor: {
                 title: "Proximity Sensor Research Project",
@@ -657,15 +785,15 @@
                 org: "Independent System Development • Mission Viejo, CA",
                 badge: '<i class="fa-solid fa-terminal"></i> System Architecture',
                 deepDescription: `
-                    <p>This software architecture project focused on implementing a highly technical, tactical platform layout explicitly engineered to showcase aerospace engineering datasets and hardware profiles without non-technical hospitality background text.</p>
+                    <p>This software architecture project focused on implementing a highly technical, tactical platform layout explicitly engineered to showcase aerospace engineering datasets and hardware profiles.</p>
                     <h5>Comprehensive Systems Breakdown:</h5>
                     <ul>
                         <li><strong>Interface Engineering & HUD Mockups:</strong> Configured clean custom layout models implementing technical monospace text fonts, reactive gridline overlays, and color spaces inspired by tactical fighter cockpit instrument displays.</li>
                         <li><strong>Dynamic Client Database Relays:</strong> Formulated an interactive modal architecture leveraging key-value JavaScript Data Structures to securely store and swap complex laboratory text metrics on user interaction.</li>
-                        <li><strong>Strategic Professional Alignment:</strong> Restructured section matrices to systematically group structural CAD, automation firmware, and propulsion cycle projects, maximizing visibility for independent defense aerospace firms.</li>
+                        <li><strong>Strategic Professional Alignment:</strong> Restructured section matrices to systematically group structural CAD, automation firmware, and propulsion cycle projects.</li>
                     </ul>
                     <h5>Analytical State:</h5>
-                    <p>Platform successfully deployed, optimized for high-performance responsive scaling, and completely mapped to custom academic parameters.</p>
+                    <p>Platform successfully deployed, optimized for high-performance responsive scaling.</p>
                 `,
                 videoHtml: `<div class="media-placeholder-hud">// RAW INTERFACE COMPILATION STABLE // RENDERING CLIENT DATA STRUCTURE RECOVERY COMPLETE //</div>`,
                 images: ["media/portfolio_code_layout.jpg", "media/portfolio_responsive_check.jpg"]
@@ -690,13 +818,26 @@
             document.getElementById('modalBadge').innerHTML = data.badge;
             document.getElementById('modalDeepDescription').innerHTML = data.deepDescription;
             
-            document.getElementById('modalVideoWrapper').innerHTML = data.videoHtml;
+            const videoWrapper = document.getElementById('modalVideoWrapper');
+            videoWrapper.innerHTML = data.videoHtml;
+            
+            // Attach tap-to-fullscreen listener to featured modal video
+            const featuredVid = videoWrapper.querySelector('video');
+            if (featuredVid) {
+                featuredVid.addEventListener('click', (e) => {
+                    // Prevent conflict with default video control bar
+                    if (e.offsetY < featuredVid.clientHeight - 45) {
+                        openLightbox('video', featuredVid.src);
+                    }
+                });
+            }
             
             const galleryWrapper = document.getElementById('modalGalleryWrapper');
             galleryWrapper.innerHTML = ''; 
             
             data.images.forEach(imgUrl => {
                 const lowerUrl = imgUrl.toLowerCase();
+                
                 if (lowerUrl.endsWith('.mp4') || lowerUrl.endsWith('.mov')) {
                     const videoNode = document.createElement('video');
                     videoNode.src = imgUrl;
@@ -705,15 +846,36 @@
                     videoNode.playsInline = true;
                     videoNode.className = "gallery-img";
                     
+                    videoNode.addEventListener('click', (e) => {
+                        if (e.offsetY < videoNode.clientHeight - 45) {
+                            openLightbox('video', imgUrl);
+                        }
+                    });
+                    
                     videoNode.onerror = function() {
                         this.style.display = 'none';
                     };
                     galleryWrapper.appendChild(videoNode);
+                } else if (lowerUrl.endsWith('.pdf')) {
+                    const pdfLink = document.createElement('a');
+                    pdfLink.href = imgUrl;
+                    pdfLink.target = "_blank";
+                    pdfLink.className = "btn btn-primary full-width";
+                    pdfLink.style.margin = "0.75rem 0";
+                    pdfLink.style.textAlign = "center";
+                    pdfLink.style.display = "block";
+                    pdfLink.style.textDecoration = "none";
+                    pdfLink.innerHTML = `<i class="fa-solid fa-file-pdf"></i> VIEW TECHNICAL DATA PACKAGE: CAD VS REAL (PDF)`;
+                    galleryWrapper.appendChild(pdfLink);
                 } else {
                     const imgNode = document.createElement('img');
                     imgNode.src = imgUrl;
                     imgNode.alt = data.title + " Laboratory Schematic Element";
                     imgNode.className = "gallery-img";
+                    
+                    imgNode.addEventListener('click', () => {
+                        openLightbox('image', imgUrl);
+                    });
                     
                     imgNode.onerror = function() {
                         this.style.display = 'none';
@@ -732,6 +894,51 @@
             document.body.style.overflow = ''; 
             document.getElementById('modalVideoWrapper').innerHTML = '';
         }
+
+        // Lightbox Functions
+        function openLightbox(type, src) {
+            const lightbox = document.getElementById('lightboxModal');
+            const wrapper = document.getElementById('lightboxMediaWrapper');
+            wrapper.innerHTML = '';
+
+            if (type === 'image') {
+                const img = document.createElement('img');
+                img.src = src;
+                img.className = 'lightbox-media';
+                wrapper.appendChild(img);
+            } else if (type === 'video') {
+                const vid = document.createElement('video');
+                vid.src = src;
+                vid.controls = true;
+                vid.autoplay = true;
+                vid.playsInline = true;
+                vid.className = 'lightbox-media';
+                wrapper.appendChild(vid);
+            }
+
+            lightbox.classList.add('active');
+        }
+
+        function closeLightbox(e) {
+            if (e.target.id === 'lightboxModal' || e.target.closest('.lightbox-close-btn')) {
+                const lightbox = document.getElementById('lightboxModal');
+                lightbox.classList.remove('active');
+                document.getElementById('lightboxMediaWrapper').innerHTML = '';
+            }
+        }
+
+        // Keyboard Shortcut [Escape] Listener for Modals
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const lightbox = document.getElementById('lightboxModal');
+                if (lightbox.classList.contains('active')) {
+                    lightbox.classList.remove('active');
+                    document.getElementById('lightboxMediaWrapper').innerHTML = '';
+                } else {
+                    closeProjectModal();
+                }
+            }
+        });
     </script>
 </body>
 </html>
